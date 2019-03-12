@@ -9,12 +9,14 @@ namespace AI_Z1
 		public readonly int Height;
 		public readonly int Width;
 		public readonly List<int[]> ResultSequence;
+		public readonly List<string> AppliedOperators;
 
-		public SolverResult(int height, int width, List<int[]> resultSequence)
+		public SolverResult(int height, int width, List<int[]> resultSequence, List<string> appliedOperators)
 		{
-			Height = height;
-			Width = width;
-			ResultSequence = resultSequence;
+			this.Height = height;
+			this.Width = width;
+			this.ResultSequence = resultSequence;
+			this.AppliedOperators = appliedOperators;
 		}
 	}
 }

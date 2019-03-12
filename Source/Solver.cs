@@ -62,6 +62,10 @@ namespace AI_Z1
 
 		public const int EMPTY_SPACE_REPRESENTATION = 0;
 
+		/// <summary>
+		/// Arguments: height, width, currentState
+		/// Return value: (bool - isMoved, int[] - newState after move)
+		/// </summary>
 		private readonly Func<int, int, int[], (bool isAvailable, int[] newState)>[] possibleMoves = new Func<int, int, int[], (bool, int[])>[4] { right, left, up, down };
 
 		private int width, height;
@@ -72,10 +76,6 @@ namespace AI_Z1
 		/// <summary>
 		/// Value 0 means empty space.
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="initialState"></param>
-		/// <param name="finalState"></param>
 		public Solver(SolverInput model)
 		{
 			possibleMoves = new Func<int, int, int[], (bool, int[])>[4] { right, left, up, down };
@@ -105,7 +105,8 @@ namespace AI_Z1
 			{
 				var result = new List<int[]>(1);
 				result.Add(startState.NodeValue);
-				return new SolverResult(height, width, result);
+
+				return new SolverResult(height, width, result, null);
 			}
 
 			nodesToVisitFromStart.Enqueue(startState);
@@ -121,7 +122,7 @@ namespace AI_Z1
 				if (meetingNode != null)
 				{
 					var result = getResultPath(meetingNode, true);
-					return new SolverResult(height, width, result);
+					return new SolverResult(height, width, result, getOperatorsFromPath(result));
 				}
 
 				meetingNode = VisitNextNodesLevel(nodesToVisitFromEnd, visitedNodesFromEnd, visitedNodesFromStart);
@@ -129,7 +130,7 @@ namespace AI_Z1
 				if (meetingNode != null)
 				{
 					var result = getResultPath(meetingNode, false);
-					return new SolverResult(height, width, result);
+					return new SolverResult(height, width, result, getOperatorsFromPath(result));
 				}
 			}
 
@@ -170,6 +171,26 @@ namespace AI_Z1
 			}
 
 			return null;
+		}
+
+		private List<string> getOperatorsFromPath(List<int[]> path)
+		{
+			List<string> appliedOperators = new List<string>();
+
+			for (int i = 0; i < path.Count - 1; i++)
+			{
+				foreach (var move in possibleMoves)
+				{
+					var result = move(height, width, path[i]);
+					if (result.isAvailable && result.newState.SequenceEqual(path[i + 1]))
+					{
+						appliedOperators.Add(move.Method.Name);
+						break;
+					}
+				}
+			}
+
+			return appliedOperators;
 		}
 
 		private List<int[]> getResultPath(MeetingNode meetingNode, bool fromStart)
@@ -242,7 +263,7 @@ namespace AI_Z1
 		{
 			int emptyID = currentState.ToList().IndexOf(EMPTY_SPACE_REPRESENTATION);
 
-			if (emptyID / height == width - 1)
+			if (emptyID / width == height - 1)
 			{
 				return (false, null);
 			}
@@ -255,7 +276,7 @@ namespace AI_Z1
 		{
 			int emptyID = currentState.ToList().IndexOf(EMPTY_SPACE_REPRESENTATION);
 
-			if (emptyID / height == 0)
+			if (emptyID / width == 0)
 			{
 				return (false, null);
 			}

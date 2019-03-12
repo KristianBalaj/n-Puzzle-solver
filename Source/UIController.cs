@@ -25,6 +25,16 @@ namespace AI_Z1
 				Console.WriteLine("Solution has {0} steps.", solverResult.ResultSequence.Count);
 				Console.WriteLine();
 
+				Console.WriteLine("Applied operators:");
+				Console.WriteLine();
+
+				foreach (var op in solverResult.AppliedOperators)
+				{
+					Console.WriteLine(op);
+				}
+
+				Console.WriteLine();
+
 				while (true)
 				{
 					Console.Write("Do you want to list all {0} steps? Y/N ", solverResult.ResultSequence.Count);
