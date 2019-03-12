@@ -19,3 +19,6 @@ Artificial Intelligence, n-Puzzle problem solver, approach: bidirectional BFS
 - Second line contains n-Puzzle width.
 - Third line contains n-Puzzle height.
 - The other lines are the initial and final state of the puzzle.
+
+## Note:
+Empty place in the puzzle is represented by number **0**. All numbers at positions in the puzzle have to be distinct (there cannot be more positions than 1 with the same number).
