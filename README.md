@@ -1,7 +1,8 @@
 # n-Puzzle solver
 Artificial Intelligence, n-Puzzle problem solver, approach: bidirectional BFS
 
-[Example of an n-Puzzle (image from the book 'Artificial Intelligence: A Modern Approach')](https://github.com/KristianBalaj/n-Puzzle-solver/blob/master/n-Puzzle.jpg)
+![Example of an n-Puzzle (image from the book 'Artificial Intelligence: A Modern Approach')](n-Puzzle.jpg)
+**Figure 1** Example of an n-Puzzle (image from the book 'Artificial Intelligence: A Modern Approach')
 
 ## Requirements:
 - [.NET Core runtime](https://dotnet.microsoft.com/download)
