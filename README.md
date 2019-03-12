@@ -12,4 +12,4 @@ Artificial Intelligence, n-Puzzle problem solver, approach: bidirectional BFS
 1. Clone the repository
 2. Run Terminal/Console in the root directory of the project
 3. Type in 'dotnet run'
-4. It's up and running
+4. It's up and running (when using text file input - see the example_input.txt file for the structure) - Console UI should be self explanatory
